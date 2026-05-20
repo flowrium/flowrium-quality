@@ -1,10 +1,8 @@
-# Flowrium 软件质量管理体系
-
-> 以信息化驱动教育领域变革
+# 软件质量管理体系
 
 ## 体系概述
 
-本仓库包含 Flowrium 的软件质量管理体系文档。体系采用**分层递进式架构**，从顶层价值观和原则到可执行的规程和量化指标，层层递进、相互关联。
+本仓库包含软件质量管理体系文档。体系采用**分层递进式架构**，从顶层价值观和原则到可执行的规程和量化指标，层层递进、相互关联。
 
 ### 四层架构
 
@@ -30,21 +28,25 @@
                                     └──── 问题反馈与改进 ←───────┘
 ```
 
+## 自动化质量流程（CI/CD）
+
+详见：[quality-system/README.md](quality-system/README.md)
+
 ## 目录导航
 
-| 目录 | 环节 | 说明 | 状态 |
-|------|------|------|------|
-| [00-quality-commitment](quality-system/00-quality-commitment/) | L1 战略层 | 质量价值观与九原则 | 已完成 |
-| [01-requirements](quality-system/01-requirements/) | 需求定义 | 需求编写、评审、追溯 | 占位 |
-| [02-solution-design](quality-system/02-solution-design/) | 方案设计 | 领域建模、界面设计、架构评审 | 占位 |
-| [03-development](quality-system/03-development/) | 开发构建 | 编码规范、代码审查、CI | 占位 |
-| [04-quality-assurance](quality-system/04-quality-assurance/) | 质量确认 | 测试策略、缺陷管理、安全测试 | **已落地** |
-| [05-release](quality-system/05-release/) | 发布交付 | 发布流程、变更管理 | 占位 |
-| [06-operations](quality-system/06-operations/) | 运维保障 | 监控告警、事件响应 | 占位 |
-| [07-improvement](quality-system/07-improvement/) | 问题反馈与改进 | 复盘、管理评审、审计 | 占位 |
-| [08-information-security](quality-system/08-information-security/) | 信息安全 | ISO 27001 专项 | 占位 |
-| [09-metrics](quality-system/09-metrics/) | L4 度量层 | 量化指标定义 | 已完成 |
-| [10-iso-traceability](quality-system/10-iso-traceability/) | ISO 追溯 | ISO 9001 / ISO 27001 条款映射 | 已完成 |
+| 目录                                                                 | 环节      | 说明                        | 状态      |
+| ------------------------------------------------------------------ | ------- | ------------------------- | ------- |
+| [00-quality-commitment](quality-system/00-quality-commitment/)     | L1 战略层  | 质量价值观与九原则                 | 已完成     |
+| [01-requirements](quality-system/01-requirements/)                 | 需求定义    | 需求编写、评审、追溯                | 占位      |
+| [02-solution-design](quality-system/02-solution-design/)           | 方案设计    | 领域建模、界面设计、架构评审            | 占位      |
+| [03-development](quality-system/03-development/)                   | 开发构建    | 编码规范、代码审查、CI              | 占位      |
+| [04-quality-assurance](quality-system/04-quality-assurance/)       | 质量确认    | 测试策略、缺陷管理、安全测试            | **已落地** |
+| [05-release](quality-system/05-release/)                           | 发布交付    | 发布流程、变更管理                 | 占位      |
+| [06-operations](quality-system/06-operations/)                     | 运维保障    | 监控告警、事件响应                 | 占位      |
+| [07-improvement](quality-system/07-improvement/)                   | 问题反馈与改进 | 复盘、管理评审、审计                | 占位      |
+| [08-information-security](quality-system/08-information-security/) | 信息安全    | ISO 27001 专项              | 占位      |
+| [09-metrics](quality-system/09-metrics/)                           | L4 度量层  | 量化指标定义                    | 已完成     |
+| [10-iso-traceability](quality-system/10-iso-traceability/)         | ISO 追溯  | ISO 9001 / ISO 27001 条款映射 | 已完成     |
 
 ## 质量价值观
 
