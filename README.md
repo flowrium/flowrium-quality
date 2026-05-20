@@ -1,79 +1,27 @@
-# 软件质量管理体系
+# Flowrium Quality (软件质量管理体系)
 
-## 体系概述
+> Flowrium 质量管理体系（Quality Management System），旨在为现代软件工程提供一套**分层递进式**的质量保障架构。从顶层价值观到可执行的 CI/CD 规程，全方位保障软件产品的高质量交付。
 
-本仓库包含软件质量管理体系文档。体系采用**分层递进式架构**，从顶层价值观和原则到可执行的规程和量化指标，层层递进、相互关联。
+## 📖 项目简介
 
-### 四层架构
+本项目仓库包含了完整的软件质量管理体系文档、规范、模板以及自动化质量流水线配置。体系将质量管理融入到软件生命周期的各个环节，通过标准化和自动化的手段，实现**内建质量**。
 
-```
-┌─────────────────────────────────────────┐
-│  L1 战略层 — 质量价值观与九原则           │
-├─────────────────────────────────────────┤
-│  L2 流程层 — 企业级工作流 + 质量门禁       │
-├─────────────────────────────────────────┤
-│  L3 执行层 — 规程 / 标准 / 模板 / 清单    │
-├─────────────────────────────────────────┤
-│  L4 度量层 — 量化指标 / 检验标准 / 改进    │
-├─────────────────────────────────────────┤
-│  ISO 追溯矩阵 — 条款映射                  │
-└─────────────────────────────────────────┘
-```
+核心目标：
+- 建立统一的质量标准和认知
+- 提供可落地的质量保障工程实践
+- 满足 ISO 9001 与 ISO 27001 等体系认证要求
 
-### 流程全景
+## 🗺️ 体系架构与目录导航
 
-```
-需求定义 → 方案设计 → 开发构建 → 质量确认 → 发布交付 → 运维保障
-                                    ↑                          │
-                                    └──── 问题反馈与改进 ←───────┘
-```
+本质量体系按照模块化组织，主要包含以下核心组件：
 
-## 自动化质量流程（CI/CD）
+- 📂 **[核心概念与治理 (01-concepts)](quality-system/01-concepts/)**：质量价值观、原则、方针以及治理规则和例外豁免机制。
+- 📂 **[交付生命周期阶段 (02-delivery-stages)](quality-system/02-delivery-stages/)**：覆盖从需求规划到运营反馈的完整软件交付价值链，包含各阶段的具体操作规程。
+- 📂 **[横向贯穿领域 (03-cross-cutting)](quality-system/03-cross-cutting/)**：安全、配置管理、需求追溯等跨越所有交付阶段的横向支撑体系。
+- 📂 **[流水线验证机制 (04-pipeline-verification)](quality-system/04-pipeline-verification/)**：自动化质量流程与 CI/CD 验证标准与实现机制。
+- 📂 **[AI 辅助开发增强 (05-ai-coding-extension)](quality-system/05-ai-coding-extension/)**：结合 AI 辅助编码工具（如 Trae、Copilot）的质量保障扩展与最佳实践。
+- 📂 **[度量与指标 (06-metrics-reserved)](quality-system/06-metrics-reserved/)**：质量度量指标、数据看板和评价体系。
+- 📂 **[标准合规追溯 (07-standard-traceability)](quality-system/07-standard-traceability/)**：ISO 9001 / ISO 27001 等行业标准的合规性映射矩阵。
+- 📂 **[模板库 (templates)](quality-system/templates/)**：体系落地所需的各类标准化模板。
 
-详见：[quality-system/README.md](quality-system/README.md)
-
-## 目录导航
-
-| 目录                                                                 | 环节      | 说明                        | 状态      |
-| ------------------------------------------------------------------ | ------- | ------------------------- | ------- |
-| [00-quality-commitment](quality-system/00-quality-commitment/)     | L1 战略层  | 质量价值观与九原则                 | 已完成     |
-| [01-requirements](quality-system/01-requirements/)                 | 需求定义    | 需求编写、评审、追溯                | 占位      |
-| [02-solution-design](quality-system/02-solution-design/)           | 方案设计    | 领域建模、界面设计、架构评审            | 占位      |
-| [03-development](quality-system/03-development/)                   | 开发构建    | 编码规范、代码审查、CI              | 占位      |
-| [04-quality-assurance](quality-system/04-quality-assurance/)       | 质量确认    | 测试策略、缺陷管理、安全测试            | **已落地** |
-| [05-release](quality-system/05-release/)                           | 发布交付    | 发布流程、变更管理                 | 占位      |
-| [06-operations](quality-system/06-operations/)                     | 运维保障    | 监控告警、事件响应                 | 占位      |
-| [07-improvement](quality-system/07-improvement/)                   | 问题反馈与改进 | 复盘、管理评审、审计                | 占位      |
-| [08-information-security](quality-system/08-information-security/) | 信息安全    | ISO 27001 专项              | 占位      |
-| [09-metrics](quality-system/09-metrics/)                           | L4 度量层  | 量化指标定义                    | 已完成     |
-| [10-iso-traceability](quality-system/10-iso-traceability/)         | ISO 追溯  | ISO 9001 / ISO 27001 条款映射 | 已完成     |
-
-## 质量价值观
-
-1. **内建质量** — 质量生于构建，而非检验
-2. **持续精进** — 达标是起点，超越是追求
-3. **流程服务产品** — 流程为产品服务，而非约束产品
-4. **领域驱动** — 深刻理解业务领域，让领域认知驱动设计与决策
-
-## 质量九原则
-
-1. 质量是全团队的责任
-2. 领域认知是质量的根基
-3. 需求是质量的起点
-4. 简单设计优于过度设计
-5. 验证前置
-6. 安全是默认属性
-7. 变更与发布受控
-8. 度量驱动改进
-9. 体系自演进
-
-## 认证目标
-
-- ISO 9001:2015 质量管理体系
-- ISO 27001:2022 信息安全管理体系
-
-## 文档规范
-
-- 所有文档使用中文撰写，术语附英文对照
-- 文档类型：规程（Procedure）、标准（Standard）、模板（Template）、指南（Guide）、检查清单（Checklist）
-- 文档格式：Markdown
+> 💡 详细的体系架构、组件说明和 CI/CD 自动化质量流程示例，请参阅子目录说明：[quality-system/README.md](quality-system/README.md)
