@@ -1,4 +1,4 @@
-# 02 交付环节层 (Delivery Stages)
+#  交付环节层 (Delivery Stages)
 
 02-delivery-stages 是软件质量管理体系的第二层，表示端到端交付过程中的关键质量控制环节。
 
