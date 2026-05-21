@@ -39,7 +39,8 @@
 
 - 合并准入检查
 - 持续集成
-- 静态分析
+- 静态分析（详见 [代码静态扫描规程](./procedures/static-analysis-procedure.md)）
+- 开源依赖安全扫描（含 CVE 检查，详见 [安全测试规程](../04-verify-gate/procedures/security-test-procedure.md) 的 SCA 章节）
 - 构建与打包
 - 制品版本标识
 - 制品归档
@@ -65,8 +66,8 @@
 - 编译构建验证
 - 流水线单元测试执行
 - 代码覆盖率门禁
-- 静态代码分析检查（如 SonarQube）
-- 开源依赖安全扫描预检查
+- 静态代码分析检查（详见 [代码静态扫描规程](./procedures/static-analysis-procedure.md) 的质量门禁部分）
+- 开源依赖安全扫描预检查（详见 [安全测试规程](../04-verify-gate/procedures/security-test-procedure.md) 的 CVE 阻断规则）
 
 ## 9. 横切能力关联
 
