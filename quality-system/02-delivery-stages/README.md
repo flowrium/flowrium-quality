@@ -16,6 +16,20 @@
 
 它吸收 DevOps 的持续集成、持续验证、持续交付和运行反馈思想，但不把体系命名为 DevOps 体系，以便兼容传统软件工程、敏捷研发、AI Coding 和未来的 AI 原生研发模式。
 
+## 索引
+
+从本页可快速跳转到每个交付环节的定义与规程：
+
+| 环节 | 说明 | 环节 README | 环节定义 | 规程（procedures/） |
+| --- | --- | --- | --- | --- |
+| `01-plan-change` | 规划与变更 | [README](./01-plan-change/README.md) | [stage-definition](./01-plan-change/stage-definition.md) | [requirement-writing-procedure](./01-plan-change/procedures/requirement-writing-procedure.md) |
+| `02-design-implement` | 设计与实现 | [README](./02-design-implement/README.md) | [stage-definition](./02-design-implement/stage-definition.md) | [unit-test-procedure](./02-design-implement/procedures/unit-test-procedure.md) |
+| `03-integrate-build` | 集成与构建 | [README](./03-integrate-build/README.md) | [stage-definition](./03-integrate-build/stage-definition.md) | [static-analysis-procedure](./03-integrate-build/procedures/static-analysis-procedure.md) |
+| `04-verify-gate` | 验证与准入 | [README](./04-verify-gate/README.md) | [stage-definition](./04-verify-gate/stage-definition.md) | [test-strategy](./04-verify-gate/procedures/test-strategy.md), [integration-test-procedure](./04-verify-gate/procedures/integration-test-procedure.md), [e2e-test-procedure](./04-verify-gate/procedures/e2e-test-procedure.md), [performance-test-procedure](./04-verify-gate/procedures/performance-test-procedure.md), [security-test-procedure](./04-verify-gate/procedures/security-test-procedure.md) |
+| `05-release-deploy` | 发布与部署 | [README](./05-release-deploy/README.md) | [stage-definition](./05-release-deploy/stage-definition.md) | [release-procedure](./05-release-deploy/procedures/release-procedure.md) |
+| `06-operate-observe` | 运行与观察 | [README](./06-operate-observe/README.md) | [stage-definition](./06-operate-observe/stage-definition.md) | [monitoring-alert-standard](./06-operate-observe/procedures/monitoring-alert-standard.md), [incident-response-procedure](./06-operate-observe/procedures/incident-response-procedure.md), [backup-recovery-standard](./06-operate-observe/procedures/backup-recovery-standard.md) |
+| `07-feedback-improve` | 反馈与改进 | [README](./07-feedback-improve/README.md) | [stage-definition](./07-feedback-improve/stage-definition.md) | [postmortem-procedure](./07-feedback-improve/procedures/postmortem-procedure.md), [internal-audit-procedure](./07-feedback-improve/procedures/internal-audit-procedure.md), [management-review-procedure](./07-feedback-improve/procedures/management-review-procedure.md) |
+
 ## 简版一句话解释
 
 | 环节 | 一句话解释 |
