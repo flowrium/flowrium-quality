@@ -2,6 +2,34 @@
 
 本质量体系提供了一套完整、系统的规范、流程和指南，旨在贯穿软件交付的全生命周期，确保产品的高质量、高安全性和高可靠性。
 
+## 一图理解：质量织入全员 AI Coding
+
+每个人都用 AI 更快交付，也一起把质量带进每一步。
+
+[查看页面版总览](00-overview/index.html)
+
+```mermaid
+flowchart TB
+  TEAM["全员角色<br/>业务 / 产品 / 研发 / 测试/QA / 安全 / 运维"]
+  AI["共同工作方式<br/>AI Coding / Agent 协作"]
+  QUALITY["质量主线<br/>质量不是最后补救，而是织入交付全过程"]
+
+  TEAM --> AI --> QUALITY
+
+  QUALITY --> PLAN[规划]
+  PLAN --> DESIGN[设计]
+  DESIGN --> IMPLEMENT[实现]
+  IMPLEMENT --> BUILD[构建]
+  BUILD --> VERIFY[验证]
+  VERIFY --> OPERATE[运行]
+  OPERATE --> IMPROVE[改进]
+  IMPROVE -. 反馈回流 .-> PLAN
+```
+
+- **AI 提升效率**，但不替代质量判断。
+- **质量进入过程**，不是最后补救。
+- **证据形成闭环**，让交付可信可追溯。
+
 ## 体系架构与组件
 
 本体系按照模块化组织，主要包含以下核心组件。各组件相互协同，共同支撑整个质量保障体系：
