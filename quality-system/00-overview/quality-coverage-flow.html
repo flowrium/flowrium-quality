@@ -1,0 +1,456 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>软件交付质量保障流程图</title>
+  <style>
+    :root {
+      --ink: #152033;
+      --muted: #66758a;
+      --line: #b7c5d6;
+      --canvas: #f4f7fb;
+      --panel: #ffffff;
+      --green: #1b9a61;
+      --amber: #d89111;
+      --gray: #9aa7b8;
+      --red: #cc4b4b;
+      --blue: #2f6fac;
+      --border: #d9e2ed;
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      min-width: 320px;
+      background: #edf2f7;
+      color: var(--ink);
+      font-family: "Microsoft YaHei", "Noto Sans CJK SC", Arial, sans-serif;
+    }
+
+    .page {
+      max-width: 1740px;
+      margin: 0 auto;
+      padding: 28px 32px 36px;
+    }
+
+    .topbar {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 24px;
+      margin-bottom: 20px;
+    }
+
+    h1 {
+      margin: 0;
+      font-size: 28px;
+      line-height: 1.25;
+      letter-spacing: 0;
+    }
+
+    .intro {
+      max-width: 780px;
+      margin: 8px 0 0;
+      color: var(--muted);
+      font-size: 15px;
+      line-height: 1.6;
+    }
+
+    .summary {
+      display: grid;
+      grid-template-columns: repeat(4, auto);
+      gap: 8px;
+      flex: none;
+    }
+
+    .summary-item {
+      min-width: 90px;
+      padding: 10px 12px;
+      border: 1px solid var(--border);
+      border-top: 3px solid var(--status);
+      background: #fff;
+      font-size: 12px;
+      color: var(--muted);
+    }
+
+    .summary-item strong {
+      display: block;
+      margin-bottom: 2px;
+      color: var(--ink);
+      font-size: 20px;
+    }
+
+    .toolbar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      margin-bottom: 12px;
+    }
+
+    .toolbar-title { font-size: 14px; color: var(--muted); }
+    .filters { display: flex; gap: 8px; flex-wrap: wrap; }
+
+    .filter {
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
+      min-height: 32px;
+      padding: 0 11px;
+      border: 1px solid var(--border);
+      background: #fff;
+      color: #435168;
+      font: inherit;
+      font-size: 13px;
+      cursor: pointer;
+    }
+
+    .filter[aria-pressed="true"] { border-color: #62758d; background: #eaf0f7; color: var(--ink); }
+    .dot { width: 8px; height: 8px; border-radius: 50%; background: var(--status); flex: none; }
+
+    .diagram-scroll {
+      overflow-x: auto;
+      border: 1px solid var(--border);
+      background: #fff;
+    }
+
+    .diagram {
+      position: relative;
+      width: 1600px;
+      height: 1040px;
+      overflow: hidden;
+      background:
+        linear-gradient(#f8fafc 1px, transparent 1px),
+        linear-gradient(90deg, #f8fafc 1px, transparent 1px),
+        var(--canvas);
+      background-size: 30px 30px;
+    }
+
+    .connection-layer {
+      position: absolute;
+      inset: 0;
+      width: 1600px;
+      height: 1040px;
+      pointer-events: none;
+      overflow: visible;
+    }
+
+    .flow-line {
+      fill: none;
+      stroke: #456d97;
+      stroke-width: 2.5;
+      marker-end: url(#flow-arrow);
+    }
+
+    .measure-line {
+      fill: none;
+      stroke: #a9b7c7;
+      stroke-width: 1.5;
+    }
+
+    .measure-line.implemented { stroke: #5fae85; }
+    .measure-line.in-progress { stroke: #dfa831; }
+    .measure-line.unimplemented { stroke: #adb8c7; stroke-dasharray: 5 4; }
+    .measure-line.gap { stroke: #d97777; stroke-dasharray: 5 4; }
+
+    .flow-caption {
+      position: absolute;
+      left: 690px;
+      top: 425px;
+      width: 220px;
+      text-align: center;
+      color: #506d8a;
+      font-size: 13px;
+      font-weight: 700;
+      letter-spacing: 0;
+    }
+
+    .node {
+      position: absolute;
+      width: 178px;
+      min-height: 76px;
+      padding: 13px 15px 11px;
+      border: 2px solid var(--node-color);
+      border-radius: 6px;
+      background: var(--panel);
+      box-shadow: 0 2px 8px rgba(22, 39, 62, .10);
+      text-align: center;
+    }
+
+    .node::before {
+      position: absolute;
+      top: -13px;
+      left: 50%;
+      display: grid;
+      width: 24px;
+      height: 24px;
+      place-items: center;
+      transform: translateX(-50%);
+      border-radius: 50%;
+      background: var(--node-color);
+      color: #fff;
+      content: attr(data-step);
+      font-size: 12px;
+      font-weight: 700;
+    }
+
+    .node-name { display: block; font-size: 17px; font-weight: 700; }
+    .node-code { display: block; margin-top: 5px; color: var(--muted); font-size: 11px; letter-spacing: 0; }
+
+    .measure-group {
+      position: absolute;
+      width: 226px;
+    }
+
+    .measure-group-label {
+      margin: 0 0 6px 2px;
+      color: #617087;
+      font-size: 12px;
+      font-weight: 700;
+    }
+
+    .measure {
+      position: relative;
+      display: flex;
+      align-items: center;
+      width: 100%;
+      min-height: 38px;
+      margin-top: 6px;
+      padding: 8px 10px 8px 13px;
+      border: 1px solid var(--border);
+      border-left: 4px solid var(--status);
+      border-radius: 4px;
+      background: #fff;
+      color: var(--ink);
+      font: inherit;
+      font-size: 13px;
+      line-height: 1.35;
+      text-align: left;
+      cursor: pointer;
+      box-shadow: 0 1px 2px rgba(22, 39, 62, .06);
+    }
+
+    .measure:hover, .measure:focus-visible { outline: none; border-color: #607b98; box-shadow: 0 0 0 3px rgba(47, 111, 172, .18); }
+    .measure.is-muted { opacity: .2; }
+    .measure.is-selected { border-color: #2f6fac; box-shadow: 0 0 0 3px rgba(47, 111, 172, .18); }
+    .measure .state { width: 7px; height: 7px; margin-right: 8px; border-radius: 50%; background: var(--status); flex: none; }
+
+    .implemented { --status: var(--green); }
+    .in-progress { --status: var(--amber); }
+    .unimplemented { --status: var(--gray); }
+    .gap { --status: var(--red); }
+
+    .detail {
+      display: grid;
+      grid-template-columns: 210px 1fr 250px;
+      gap: 24px;
+      align-items: center;
+      margin-top: 16px;
+      padding: 17px 20px;
+      border: 1px solid var(--border);
+      border-left: 4px solid #2f6fac;
+      background: #fff;
+    }
+
+    .detail-label { color: var(--muted); font-size: 13px; }
+    .detail-name { margin-top: 4px; font-size: 17px; font-weight: 700; }
+    .detail-copy { color: #47566c; font-size: 14px; line-height: 1.65; }
+    .detail-status { color: var(--muted); font-size: 13px; text-align: right; }
+
+    @media (max-width: 900px) {
+      .page { padding: 20px 16px 28px; }
+      .topbar, .toolbar { align-items: flex-start; flex-direction: column; }
+      .summary { width: 100%; grid-template-columns: repeat(4, 1fr); }
+      .summary-item { min-width: 0; }
+      .detail { grid-template-columns: 1fr; gap: 8px; }
+      .detail-status { text-align: left; }
+    }
+  </style>
+</head>
+<body>
+  <main class="page">
+    <header class="topbar">
+      <div>
+        <h1>软件交付质量保障流程图</h1>
+        <p class="intro">交付流程在中心形成闭环；质量措施展示在节点外部，并以连线归属到对应环节。点击任一措施可查看其应维护的实施信息。</p>
+      </div>
+      <section class="summary" aria-label="措施状态汇总">
+        <div class="summary-item" style="--status: var(--green)"><strong id="implemented-count">0</strong>已实施</div>
+        <div class="summary-item" style="--status: var(--amber)"><strong id="in-progress-count">0</strong>实施中</div>
+        <div class="summary-item" style="--status: var(--gray)"><strong id="unimplemented-count">0</strong>未实现</div>
+        <div class="summary-item" style="--status: var(--red)"><strong id="gap-count">0</strong>关键缺口</div>
+      </section>
+    </header>
+
+    <div class="toolbar">
+      <span class="toolbar-title">筛选措施状态</span>
+      <div class="filters" role="group" aria-label="按状态筛选措施">
+        <button class="filter" type="button" data-filter="all" aria-pressed="true">全部</button>
+        <button class="filter implemented" type="button" data-filter="implemented" aria-pressed="false"><span class="dot"></span>已实施</button>
+        <button class="filter in-progress" type="button" data-filter="in-progress" aria-pressed="false"><span class="dot"></span>实施中</button>
+        <button class="filter unimplemented" type="button" data-filter="unimplemented" aria-pressed="false"><span class="dot"></span>未实现</button>
+        <button class="filter gap" type="button" data-filter="gap" aria-pressed="false"><span class="dot"></span>关键缺口</button>
+      </div>
+    </div>
+
+    <section class="diagram-scroll" aria-label="软件交付质量流程">
+      <div class="diagram" id="diagram">
+        <svg class="connection-layer" id="connections" viewBox="0 0 1600 1040" aria-hidden="true">
+          <defs>
+            <marker id="flow-arrow" markerWidth="11" markerHeight="11" refX="8" refY="5.5" orient="auto">
+              <path d="M0,0 L10,5.5 L0,11 z" fill="#456d97"/>
+            </marker>
+          </defs>
+          <path class="flow-line" d="M335 362 L435 285"/>
+          <path class="flow-line" d="M613 265 L705 265"/>
+          <path class="flow-line" d="M883 285 L995 362"/>
+          <path class="flow-line" d="M1085 420 L1085 620"/>
+          <path class="flow-line" d="M995 697 L883 775"/>
+          <path class="flow-line" d="M705 795 L613 795"/>
+          <path class="flow-line" d="M435 793 H180 V363 H246"/>
+        </svg>
+        <div class="flow-caption">交付主流程</div>
+
+        <article class="node" id="node-plan" data-step="01" style="left: 246px; top: 325px; --node-color: #356ca5"><span class="node-name">规划与变更</span><span class="node-code">PLAN &amp; CHANGE</span></article>
+        <article class="node" id="node-design" data-step="02" style="left: 435px; top: 225px; --node-color: #2f7d50"><span class="node-name">设计与实现</span><span class="node-code">DESIGN &amp; IMPLEMENT</span></article>
+        <article class="node" id="node-build" data-step="03" style="left: 705px; top: 225px; --node-color: #b27713"><span class="node-name">集成与构建</span><span class="node-code">INTEGRATE &amp; BUILD</span></article>
+        <article class="node" id="node-gate" data-step="04" style="left: 995px; top: 325px; --node-color: #7050a8"><span class="node-name">验证与准入</span><span class="node-code">VERIFY &amp; GATE</span></article>
+        <article class="node" id="node-release" data-step="05" style="left: 995px; top: 620px; --node-color: #b85d37"><span class="node-name">发布与部署</span><span class="node-code">RELEASE &amp; DEPLOY</span></article>
+        <article class="node" id="node-observe" data-step="06" style="left: 705px; top: 755px; --node-color: #2d7b85"><span class="node-name">运行与观测</span><span class="node-code">OPERATE &amp; OBSERVE</span></article>
+        <article class="node" id="node-improve" data-step="07" style="left: 435px; top: 755px; --node-color: #4b6499"><span class="node-name">反馈与改进</span><span class="node-code">FEEDBACK &amp; IMPROVE</span></article>
+
+        <section class="measure-group" style="left: 40px; top: 155px" aria-label="规划与变更措施">
+          <p class="measure-group-label">规划与变更的质量措施</p>
+          <button class="measure unimplemented" type="button" data-node="node-plan" data-name="需求编写规范" data-detail="需求应具有明确业务目标、范围、验收标准和变更记录。" data-evidence="需求条目、评审记录、验收标准"><span class="state"></span>需求编写规范</button>
+          <button class="measure unimplemented" type="button" data-node="node-plan" data-name="需求评审" data-detail="对关键需求进行完整性、可测试性和影响范围评审。" data-evidence="需求评审清单、评审结论"><span class="state"></span>需求评审</button>
+          <button class="measure unimplemented" type="button" data-node="node-plan" data-name="变更影响评估" data-detail="在实施前识别变更对架构、测试、运行和合规的影响。" data-evidence="变更申请、影响分析"><span class="state"></span>变更影响评估</button>
+        </section>
+
+        <section class="measure-group" style="left: 390px; top: 62px" aria-label="设计与实现措施">
+          <p class="measure-group-label">设计与实现的质量措施</p>
+          <button class="measure unimplemented" type="button" data-node="node-design" data-name="方案与架构评审" data-detail="关键方案在编码前完成可行性、边界和风险评审。" data-evidence="设计文档、评审记录"><span class="state"></span>方案与架构评审</button>
+          <button class="measure unimplemented" type="button" data-node="node-design" data-name="代码评审" data-detail="代码合并前由具备相应能力的人员进行可维护性、正确性和安全性复核。" data-evidence="合并请求、评审记录"><span class="state"></span>代码评审</button>
+          <button class="measure unimplemented" type="button" data-node="node-design" data-name="单元测试" data-detail="核心逻辑应通过自动化单元测试验证，并保留执行结果。" data-evidence="单元测试报告、覆盖率数据"><span class="state"></span>单元测试</button>
+        </section>
+
+        <section class="measure-group" style="left: 690px; top: 62px" aria-label="集成与构建措施">
+          <p class="measure-group-label">集成与构建的质量措施</p>
+          <button class="measure unimplemented" type="button" data-node="node-build" data-name="可重复构建与制品管理" data-detail="构建过程、依赖和输出制品应可复现、可识别、可追溯。" data-evidence="构建流水线、制品仓库记录"><span class="state"></span>可重复构建与制品管理</button>
+          <button class="measure unimplemented" type="button" data-node="node-build" data-name="静态分析" data-detail="通过规则检查识别代码缺陷、复杂度问题和已知风险。" data-evidence="静态分析报告、整改记录"><span class="state"></span>静态分析</button>
+          <button class="measure unimplemented" type="button" data-node="node-build" data-name="集成验证" data-detail="在集成环境验证接口、依赖组件和关键业务链路。" data-evidence="集成测试报告、环境记录"><span class="state"></span>集成验证</button>
+        </section>
+
+        <section class="measure-group" style="left: 1310px; top: 155px" aria-label="验证与准入措施">
+          <p class="measure-group-label">验证与准入的质量措施</p>
+          <button class="measure unimplemented" type="button" data-node="node-gate" data-name="测试策略" data-detail="按风险定义测试范围、测试层级、环境和退出准则。" data-evidence="测试策略、测试计划"><span class="state"></span>测试策略</button>
+          <button class="measure unimplemented" type="button" data-node="node-gate" data-name="端到端测试" data-detail="对关键用户旅程和业务流程执行自动化或受控验证。" data-evidence="E2E 报告、测试记录"><span class="state"></span>端到端测试</button>
+          <button class="measure unimplemented" type="button" data-node="node-gate" data-name="安全与性能测试" data-detail="按风险实施安全和性能验证，并处理不可接受的问题。" data-evidence="安全报告、性能报告"><span class="state"></span>安全与性能测试</button>
+        </section>
+
+        <section class="measure-group" style="left: 1310px; top: 585px" aria-label="发布与部署措施">
+          <p class="measure-group-label">发布与部署的质量措施</p>
+          <button class="measure unimplemented" type="button" data-node="node-release" data-name="发布检查与审批" data-detail="发布前确认准入结论、发布范围和责任人，保留审批证据。" data-evidence="发布清单、审批记录"><span class="state"></span>发布检查与审批</button>
+          <button class="measure unimplemented" type="button" data-node="node-release" data-name="配置与回滚预案" data-detail="变更配置应可控，异常时可按预案回滚或止损。" data-evidence="配置记录、回滚预案"><span class="state"></span>配置与回滚预案</button>
+          <button class="measure unimplemented" type="button" data-node="node-release" data-name="部署后自动核验" data-detail="部署完成后自动检查服务可用性、关键指标和版本一致性。" data-evidence="部署验证报告、监控快照"><span class="state"></span>部署后自动核验</button>
+        </section>
+
+        <section class="measure-group" style="left: 690px; top: 850px" aria-label="运行与观测措施">
+          <p class="measure-group-label">运行与观测的质量措施</p>
+          <button class="measure unimplemented" type="button" data-node="node-observe" data-name="监控与告警" data-detail="基于日志、指标和链路数据发现异常，并设置响应阈值。" data-evidence="监控面板、告警规则"><span class="state"></span>监控与告警</button>
+          <button class="measure unimplemented" type="button" data-node="node-observe" data-name="事件响应" data-detail="明确事件分级、响应责任、升级路径和处置记录。" data-evidence="事件单、响应记录"><span class="state"></span>事件响应</button>
+          <button class="measure unimplemented" type="button" data-node="node-observe" data-name="备份恢复" data-detail="关键数据和服务具备备份、恢复要求及定期演练。" data-evidence="备份记录、恢复演练报告"><span class="state"></span>备份恢复</button>
+        </section>
+
+        <section class="measure-group" style="left: 390px; top: 850px" aria-label="反馈与改进措施">
+          <p class="measure-group-label">反馈与改进的质量措施</p>
+          <button class="measure unimplemented" type="button" data-node="node-improve" data-name="故障复盘" data-detail="对重要问题识别根因、改进措施和复发防止机制。" data-evidence="复盘报告、行动项"><span class="state"></span>故障复盘</button>
+          <button class="measure unimplemented" type="button" data-node="node-improve" data-name="内部审核" data-detail="定期检查质量体系是否按要求运行，并跟踪发现项。" data-evidence="审核计划、审核报告"><span class="state"></span>内部审核</button>
+          <button class="measure unimplemented" type="button" data-node="node-improve" data-name="管理评审" data-detail="管理层评估质量目标、风险、资源和改进结果。" data-evidence="评审会议记录、决策项"><span class="state"></span>管理评审</button>
+        </section>
+      </div>
+    </section>
+
+    <section class="detail" aria-live="polite">
+      <div><div class="detail-label">当前选择</div><div class="detail-name" id="detail-name">选择一项质量措施</div></div>
+      <div class="detail-copy" id="detail-copy">点击流程图外围的任一措施，查看该措施的质量要求，以及台账中应维护的证据类型。</div>
+      <div class="detail-status" id="detail-status">措施状态将在此显示</div>
+    </section>
+  </main>
+
+  <script>
+    const diagram = document.getElementById('diagram');
+    const layer = document.getElementById('connections');
+    const measures = [...document.querySelectorAll('.measure')];
+    const statusNames = { implemented: '已实施', 'in-progress': '实施中', unimplemented: '未实现', gap: '关键缺口' };
+
+    function statusOf(element) {
+      return Object.keys(statusNames).find((name) => element.classList.contains(name));
+    }
+
+    function rectInDiagram(element) {
+      const rect = element.getBoundingClientRect();
+      const base = diagram.getBoundingClientRect();
+      return { left: rect.left - base.left, top: rect.top - base.top, width: rect.width, height: rect.height };
+    }
+
+    function anchor(from, to) {
+      const dx = to.x - from.x;
+      const dy = to.y - from.y;
+      const ratio = Math.abs(dx) > Math.abs(dy) ? from.width / 2 : from.height / 2;
+      const scale = Math.abs(dx) > Math.abs(dy) ? Math.abs(dx) / ratio : Math.abs(dy) / ratio;
+      return {
+        x: from.x + (dx / scale),
+        y: from.y + (dy / scale)
+      };
+    }
+
+    function drawMeasureLinks() {
+      layer.querySelectorAll('.measure-line').forEach((line) => line.remove());
+      measures.forEach((measure) => {
+        const measureRect = rectInDiagram(measure);
+        const nodeRect = rectInDiagram(document.getElementById(measure.dataset.node));
+        const source = { x: measureRect.left + measureRect.width / 2, y: measureRect.top + measureRect.height / 2, width: measureRect.width, height: measureRect.height };
+        const target = { x: nodeRect.left + nodeRect.width / 2, y: nodeRect.top + nodeRect.height / 2, width: nodeRect.width, height: nodeRect.height };
+        const start = anchor(source, target);
+        const end = anchor(target, source);
+        const bendX = (start.x + end.x) / 2;
+        const line = document.createElementNS('http://www.w3.org/2000/svg', 'path');
+        line.setAttribute('class', `measure-line ${statusOf(measure)}`);
+        line.dataset.status = statusOf(measure);
+        line.setAttribute('d', `M ${start.x} ${start.y} C ${bendX} ${start.y}, ${bendX} ${end.y}, ${end.x} ${end.y}`);
+        layer.appendChild(line);
+      });
+    }
+
+    function updateCounts() {
+      Object.keys(statusNames).forEach((status) => {
+        document.getElementById(`${status}-count`).textContent = measures.filter((measure) => statusOf(measure) === status).length;
+      });
+    }
+
+    function selectMeasure(measure) {
+      measures.forEach((item) => item.classList.toggle('is-selected', item === measure));
+      const status = statusOf(measure);
+      document.getElementById('detail-name').textContent = measure.dataset.name;
+      document.getElementById('detail-copy').textContent = measure.dataset.detail;
+      document.getElementById('detail-status').textContent = `${statusNames[status]} | 建议证据：${measure.dataset.evidence}`;
+    }
+
+    document.querySelectorAll('.filter').forEach((filter) => {
+      filter.addEventListener('click', () => {
+        const selected = filter.dataset.filter;
+        document.querySelectorAll('.filter').forEach((button) => button.setAttribute('aria-pressed', String(button === filter)));
+        measures.forEach((measure) => measure.classList.toggle('is-muted', selected !== 'all' && statusOf(measure) !== selected));
+        layer.querySelectorAll('.measure-line').forEach((line) => line.style.opacity = selected === 'all' || line.dataset.status === selected ? '1' : '.15');
+      });
+    });
+
+    measures.forEach((measure) => measure.addEventListener('click', () => selectMeasure(measure)));
+    updateCounts();
+    requestAnimationFrame(drawMeasureLinks);
+    window.addEventListener('resize', drawMeasureLinks);
+  </script>
+</body>
+</html>

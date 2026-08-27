@@ -2,19 +2,19 @@
 
 本质量体系提供了一套完整、系统的规范、流程和指南，旨在贯穿软件交付的全生命周期，确保产品的高质量、高安全性和高可靠性。
 
-## 一图理解：质量织入全员 AI Coding
+## 一图理解：质量织入软件交付全过程
 
-每个人都用 AI 更快交付，也一起把质量带进每一步。
+不论代码由人工编写、工具辅助生成，还是通过自动化方式验证，质量体系关注最终交付代码和制品是否可信。
 
 [查看页面版总览](00-overview/index.html)
 
 ```mermaid
 flowchart TB
   TEAM["全员角色<br/>业务 / 产品 / 研发 / 测试/QA / 安全 / 运维"]
-  AI["共同工作方式<br/>AI Coding / Agent 协作"]
-  QUALITY["质量主线<br/>质量不是最后补救，而是织入交付全过程"]
+  DELIVERY["共同交付方式<br/>编码 / 工具辅助 / 自动化验证"]
+  QUALITY["质量主线<br/>质量关注最终输出，而不是限定实现方式"]
 
-  TEAM --> AI --> QUALITY
+  TEAM --> DELIVERY --> QUALITY
 
   QUALITY --> PLAN[规划]
   PLAN --> DESIGN[设计]
@@ -26,7 +26,7 @@ flowchart TB
   IMPROVE -. 反馈回流 .-> PLAN
 ```
 
-- **AI 提升效率**，但不替代质量判断。
+- **编码方式不限**，但输出代码必须满足质量要求。
 - **质量进入过程**，不是最后补救。
 - **证据形成闭环**，让交付可信可追溯。
 
@@ -35,7 +35,7 @@ flowchart TB
 本体系按照模块化组织，主要包含以下核心组件。各组件相互协同，共同支撑整个质量保障体系：
 
 ### 1. 核心概念与治理 (01-concepts)
-定义质量体系的基础，包括质量价值观、原则、方针以及治理规则和例外豁免机制。这是整个体系的“宪法”。
+定义质量体系的基础，包括质量价值观、原则、政策以及治理规则和例外豁免机制。这是整个体系的“宪法”。
 - [核心概念与治理](01-concepts/)
 
 ### 2. 交付生命周期阶段 (02-delivery-stages)
@@ -43,7 +43,7 @@ flowchart TB
 - [01-规划与变更](02-delivery-stages/01-plan-change/)：需求编写规程等。
 - [02-设计与实现](02-delivery-stages/02-design-implement/)：架构评审、代码审查、编码规范、UI 设计规范等。
 - [03-集成与构建](02-delivery-stages/03-integrate-build/)：持续集成（CI）规范等。
-- [04-验证与门禁](02-delivery-stages/04-verify-gate/)：缺陷管理、测试策略及各类测试（集成、E2E、性能、安全）规程。
+- [04-验证与准入](02-delivery-stages/04-verify-gate/)：缺陷管理、测试策略及各类测试（集成、E2E、性能、安全）规程。
 - [05-发布与部署](02-delivery-stages/05-release-deploy/)：变更管理与发布规程等。
 - [06-运营与观测](02-delivery-stages/06-operate-observe/)：监控告警、故障响应、备份恢复等。
 - [07-反馈与改进](02-delivery-stages/07-feedback-improve/)：复盘规程、内部审计与管理评审等。
@@ -59,9 +59,9 @@ flowchart TB
 自动化质量流程与持续集成/持续部署（CI/CD）的验证标准与实现机制。
 - [流水线验证机制](04-pipeline-verification/)
 
-### 5. AI 辅助开发增强 (05-ai-coding-extension)
-结合现代 AI 辅助编码工具（如 Trae、GitHub Copilot）的质量保障扩展与最佳实践。
-- [AI 辅助开发增强](05-ai-coding-extension/)
+### 5. 辅助开发与自动化增强 (05-assisted-development)
+覆盖工具辅助编码、自动化生成、自动化验证等研发方式下的质量保障扩展与最佳实践。
+- [辅助开发与自动化增强](05-assisted-development/)
 
 ### 6. 度量与指标 (06-metrics-reserved)
 定义质量度量指标、数据看板和评价体系，用于驱动持续改进。

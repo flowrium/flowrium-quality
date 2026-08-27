@@ -1,0 +1,150 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1600" height="1080" viewBox="0 0 1600 1080" role="img" aria-labelledby="title desc">
+  <title id="title">软件交付质量保障流程图（示例）</title>
+  <desc id="desc">七个软件交付阶段构成闭环流程，每个阶段卡片内列出质量保障措施及其状态。</desc>
+  <defs>
+    <marker id="arrow" markerWidth="11" markerHeight="11" refX="8" refY="5.5" orient="auto">
+      <path d="M0,0 L10,5.5 L0,11 z" fill="#54708d"/>
+    </marker>
+    <filter id="shadow" x="-10%" y="-10%" width="120%" height="130%">
+      <feDropShadow dx="0" dy="3" stdDeviation="4" flood-color="#182b49" flood-opacity="0.14"/>
+    </filter>
+    <style>
+      text { font-family: "Microsoft YaHei", "Noto Sans CJK SC", Arial, sans-serif; fill: #172033; }
+      .title { font-size: 34px; font-weight: 700; }
+      .subtitle { font-size: 16px; fill: #596579; }
+      .stage-no { font-size: 14px; font-weight: 700; fill: #ffffff; }
+      .stage-title { font-size: 20px; font-weight: 700; }
+      .stage-en { font-size: 12px; fill: #68768b; }
+      .measure { font-size: 15px; }
+      .tag { font-size: 12px; font-weight: 700; }
+      .legend { font-size: 14px; fill: #46536a; }
+      .note { font-size: 14px; fill: #596579; }
+      .loop { font-size: 14px; font-weight: 700; fill: #365c83; }
+    </style>
+  </defs>
+
+  <rect width="1600" height="1080" fill="#f6f8fb"/>
+  <text x="70" y="68" class="title">软件交付质量保障流程图</text>
+  <text x="70" y="100" class="subtitle">示例视图：质量措施直接嵌入交付环节；每一条措施都可关联负责人、实施载体和证据</text>
+
+  <!-- Legend -->
+  <circle cx="1135" cy="61" r="8" fill="#22a06b"/><text x="1152" y="66" class="legend">已落地</text>
+  <circle cx="1245" cy="61" r="8" fill="#e6a817"/><text x="1262" y="66" class="legend">待加强</text>
+  <circle cx="1355" cy="61" r="8" fill="#a8b1c1"/><text x="1372" y="66" class="legend">待建设</text>
+  <circle cx="1465" cy="61" r="8" fill="#d14343"/><text x="1482" y="66" class="legend">关键缺口</text>
+
+  <!-- Flow arrows: first row -->
+  <g fill="none" stroke="#54708d" stroke-width="3" marker-end="url(#arrow)">
+    <path d="M410 310 H445"/>
+    <path d="M790 310 H825"/>
+    <path d="M1170 310 H1205"/>
+    <path d="M1380 510 V625"/>
+    <path d="M1205 775 H1170"/>
+    <path d="M825 775 H790"/>
+    <path d="M445 775 H410"/>
+    <path d="M235 625 V548 C235 522 256 505 282 505 H320"/>
+  </g>
+  <text x="244" y="570" class="loop">经验回流</text>
+
+  <!-- Card 1 -->
+  <g filter="url(#shadow)">
+    <rect x="70" y="165" width="340" height="345" rx="8" fill="#ffffff"/>
+    <rect x="70" y="165" width="340" height="62" rx="8" fill="#dcecff"/>
+    <rect x="70" y="211" width="340" height="16" fill="#dcecff"/>
+  </g>
+  <circle cx="104" cy="196" r="16" fill="#356ca5"/><text x="104" y="201" text-anchor="middle" class="stage-no">01</text>
+  <text x="132" y="201" class="stage-title">规划与变更</text><text x="93" y="250" class="stage-en">PLAN &amp; CHANGE</text>
+  <line x1="93" y1="270" x2="387" y2="270" stroke="#dce4ee"/>
+  <circle cx="105" cy="302" r="7" fill="#22a06b"/><text x="124" y="308" class="measure">需求评审与验收标准</text>
+  <circle cx="105" cy="349" r="7" fill="#22a06b"/><text x="124" y="355" class="measure">变更影响与风险评估</text>
+  <circle cx="105" cy="396" r="7" fill="#e6a817"/><text x="124" y="402" class="measure">范围与优先级确认</text>
+  <rect x="93" y="442" width="124" height="30" rx="15" fill="#eff7f2"/><text x="155" y="462" text-anchor="middle" class="tag" fill="#237044">2 已落地 / 1 待加强</text>
+
+  <!-- Card 2 -->
+  <g filter="url(#shadow)">
+    <rect x="450" y="165" width="340" height="345" rx="8" fill="#ffffff"/>
+    <rect x="450" y="165" width="340" height="62" rx="8" fill="#e4f2e8"/>
+    <rect x="450" y="211" width="340" height="16" fill="#e4f2e8"/>
+  </g>
+  <circle cx="484" cy="196" r="16" fill="#2f7d50"/><text x="484" y="201" text-anchor="middle" class="stage-no">02</text>
+  <text x="512" y="201" class="stage-title">设计与实现</text><text x="473" y="250" class="stage-en">DESIGN &amp; IMPLEMENT</text>
+  <line x1="473" y1="270" x2="767" y2="270" stroke="#dce4ee"/>
+  <circle cx="485" cy="302" r="7" fill="#22a06b"/><text x="504" y="308" class="measure">方案与架构评审</text>
+  <circle cx="485" cy="349" r="7" fill="#22a06b"/><text x="504" y="355" class="measure">代码评审与编码规范</text>
+  <circle cx="485" cy="396" r="7" fill="#22a06b"/><text x="504" y="402" class="measure">单元测试与依赖记录</text>
+  <rect x="473" y="442" width="96" height="30" rx="15" fill="#eff7f2"/><text x="521" y="462" text-anchor="middle" class="tag" fill="#237044">3 已落地</text>
+
+  <!-- Card 3 -->
+  <g filter="url(#shadow)">
+    <rect x="830" y="165" width="340" height="345" rx="8" fill="#ffffff"/>
+    <rect x="830" y="165" width="340" height="62" rx="8" fill="#fff0d3"/>
+    <rect x="830" y="211" width="340" height="16" fill="#fff0d3"/>
+  </g>
+  <circle cx="864" cy="196" r="16" fill="#b27713"/><text x="864" y="201" text-anchor="middle" class="stage-no">03</text>
+  <text x="892" y="201" class="stage-title">集成与构建</text><text x="853" y="250" class="stage-en">INTEGRATE &amp; BUILD</text>
+  <line x1="853" y1="270" x2="1147" y2="270" stroke="#dce4ee"/>
+  <circle cx="865" cy="302" r="7" fill="#22a06b"/><text x="884" y="308" class="measure">可重复构建与制品管理</text>
+  <circle cx="865" cy="349" r="7" fill="#22a06b"/><text x="884" y="355" class="measure">静态分析与依赖扫描</text>
+  <circle cx="865" cy="396" r="7" fill="#e6a817"/><text x="884" y="402" class="measure">集成环境与接口验证</text>
+  <rect x="853" y="442" width="124" height="30" rx="15" fill="#fff7df"/><text x="915" y="462" text-anchor="middle" class="tag" fill="#8b6411">2 已落地 / 1 待加强</text>
+
+  <!-- Card 4 -->
+  <g filter="url(#shadow)">
+    <rect x="1210" y="165" width="320" height="345" rx="8" fill="#ffffff"/>
+    <rect x="1210" y="165" width="320" height="62" rx="8" fill="#ede5fb"/>
+    <rect x="1210" y="211" width="320" height="16" fill="#ede5fb"/>
+  </g>
+  <circle cx="1244" cy="196" r="16" fill="#7050a8"/><text x="1244" y="201" text-anchor="middle" class="stage-no">04</text>
+  <text x="1272" y="201" class="stage-title">验证与准入</text><text x="1233" y="250" class="stage-en">VERIFY &amp; GATE</text>
+  <line x1="1233" y1="270" x2="1507" y2="270" stroke="#dce4ee"/>
+  <circle cx="1245" cy="302" r="7" fill="#22a06b"/><text x="1264" y="308" class="measure">集成与端到端验证</text>
+  <circle cx="1245" cy="349" r="7" fill="#22a06b"/><text x="1264" y="355" class="measure">安全与性能测试</text>
+  <circle cx="1245" cy="396" r="7" fill="#22a06b"/><text x="1264" y="402" class="measure">质量门禁与准入结论</text>
+  <rect x="1233" y="442" width="96" height="30" rx="15" fill="#eff7f2"/><text x="1281" y="462" text-anchor="middle" class="tag" fill="#237044">3 已落地</text>
+
+  <!-- Card 5 -->
+  <g filter="url(#shadow)">
+    <rect x="1210" y="625" width="320" height="345" rx="8" fill="#ffffff"/>
+    <rect x="1210" y="625" width="320" height="62" rx="8" fill="#fde8df"/>
+    <rect x="1210" y="671" width="320" height="16" fill="#fde8df"/>
+  </g>
+  <circle cx="1244" cy="656" r="16" fill="#b85d37"/><text x="1244" y="661" text-anchor="middle" class="stage-no">05</text>
+  <text x="1272" y="661" class="stage-title">发布与部署</text><text x="1233" y="710" class="stage-en">RELEASE &amp; DEPLOY</text>
+  <line x1="1233" y1="730" x2="1507" y2="730" stroke="#dce4ee"/>
+  <circle cx="1245" cy="762" r="7" fill="#22a06b"/><text x="1264" y="768" class="measure">发布检查与审批证据</text>
+  <circle cx="1245" cy="809" r="7" fill="#e6a817"/><text x="1264" y="815" class="measure">配置变更与回滚预案</text>
+  <circle cx="1245" cy="856" r="7" fill="#a8b1c1"/><text x="1264" y="862" class="measure">部署后自动核验</text>
+  <rect x="1233" y="902" width="124" height="30" rx="15" fill="#fff7df"/><text x="1295" y="922" text-anchor="middle" class="tag" fill="#8b6411">1 已落地 / 2 待完善</text>
+
+  <!-- Card 6 -->
+  <g filter="url(#shadow)">
+    <rect x="830" y="625" width="340" height="345" rx="8" fill="#ffffff"/>
+    <rect x="830" y="625" width="340" height="62" rx="8" fill="#dceff1"/>
+    <rect x="830" y="671" width="340" height="16" fill="#dceff1"/>
+  </g>
+  <circle cx="864" cy="656" r="16" fill="#2d7b85"/><text x="864" y="661" text-anchor="middle" class="stage-no">06</text>
+  <text x="892" y="661" class="stage-title">运行与观测</text><text x="853" y="710" class="stage-en">OPERATE &amp; OBSERVE</text>
+  <line x1="853" y1="730" x2="1147" y2="730" stroke="#dce4ee"/>
+  <circle cx="865" cy="762" r="7" fill="#22a06b"/><text x="884" y="768" class="measure">监控、日志与告警</text>
+  <circle cx="865" cy="809" r="7" fill="#22a06b"/><text x="884" y="815" class="measure">事件响应与升级机制</text>
+  <circle cx="865" cy="856" r="7" fill="#e6a817"/><text x="884" y="862" class="measure">备份恢复与演练</text>
+  <rect x="853" y="902" width="124" height="30" rx="15" fill="#fff7df"/><text x="915" y="922" text-anchor="middle" class="tag" fill="#8b6411">2 已落地 / 1 待加强</text>
+
+  <!-- Card 7 -->
+  <g filter="url(#shadow)">
+    <rect x="450" y="625" width="340" height="345" rx="8" fill="#ffffff"/>
+    <rect x="450" y="625" width="340" height="62" rx="8" fill="#e7edfa"/>
+    <rect x="450" y="671" width="340" height="16" fill="#e7edfa"/>
+  </g>
+  <circle cx="484" cy="656" r="16" fill="#4b6499"/><text x="484" y="661" text-anchor="middle" class="stage-no">07</text>
+  <text x="512" y="661" class="stage-title">反馈与改进</text><text x="473" y="710" class="stage-en">FEEDBACK &amp; IMPROVE</text>
+  <line x1="473" y1="730" x2="767" y2="730" stroke="#dce4ee"/>
+  <circle cx="485" cy="762" r="7" fill="#22a06b"/><text x="504" y="768" class="measure">故障复盘与根因分析</text>
+  <circle cx="485" cy="809" r="7" fill="#e6a817"/><text x="504" y="815" class="measure">质量度量与管理评审</text>
+  <circle cx="485" cy="856" r="7" fill="#a8b1c1"/><text x="504" y="862" class="measure">改进项跟踪与验证</text>
+  <rect x="473" y="902" width="124" height="30" rx="15" fill="#fff7df"/><text x="535" y="922" text-anchor="middle" class="tag" fill="#8b6411">1 已落地 / 2 待完善</text>
+
+  <!-- Process return annotation -->
+  <text x="70" y="1018" class="note">图的维护单位是“质量措施”：新增、调整或完成一项措施时，只更新对应阶段卡片和状态；每项措施应在台账中关联负责人、流程/工具和可验证证据。</text>
+  <text x="70" y="1052" class="note">示例状态仅用于展示版式，不代表当前项目现状。</text>
+</svg>

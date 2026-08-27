@@ -3,479 +3,151 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>质量织入全员 AI Coding | Flowrium Quality</title>
-  <style>
-    :root {
-      --ink: #172033;
-      --muted: #5a6475;
-      --line: #d8dee9;
-      --paper: #ffffff;
-      --wash: #f5f7fb;
-      --navy: #23355f;
-      --teal: #2f7478;
-      --green: #71853a;
-      --rust: #a45f32;
-      --gold: #c49a3b;
-    }
-
-    * {
-      box-sizing: border-box;
-    }
-
-    body {
-      margin: 0;
-      color: var(--ink);
-      background: var(--paper);
-      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Microsoft YaHei", Arial, sans-serif;
-      line-height: 1.5;
-    }
-
-    a {
-      color: inherit;
-      text-decoration: none;
-    }
-
-    .topbar {
-      position: sticky;
-      top: 0;
-      z-index: 10;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 20px;
-      padding: 14px clamp(20px, 4vw, 56px);
-      border-bottom: 1px solid rgba(216, 222, 233, 0.9);
-      background: rgba(255, 255, 255, 0.92);
-      backdrop-filter: blur(14px);
-    }
-
-    .brand {
-      font-weight: 800;
-      color: var(--navy);
-    }
-
-    .nav {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 16px;
-      color: var(--muted);
-      font-size: 14px;
-    }
-
-    .nav a:hover {
-      color: var(--navy);
-    }
-
-    .hero {
-      min-height: calc(100vh - 58px);
-      padding: clamp(28px, 5vw, 68px) clamp(20px, 4vw, 64px) 30px;
-      background: var(--wash);
-    }
-
-    .hero-inner {
-      max-width: 1180px;
-      margin: 0 auto;
-    }
-
-    .hero-copy {
-      max-width: 850px;
-      margin-bottom: clamp(24px, 4vw, 42px);
-    }
-
-    .eyebrow {
-      margin: 0 0 12px;
-      color: var(--teal);
-      font-size: 14px;
-      font-weight: 800;
-      letter-spacing: 0;
-    }
-
-    h1 {
-      margin: 0;
-      color: var(--navy);
-      font-size: 64px;
-      line-height: 1.08;
-      letter-spacing: 0;
-    }
-
-    .lead {
-      max-width: 760px;
-      margin: 18px 0 0;
-      color: var(--muted);
-      font-size: 21px;
-    }
-
-    .overview {
-      padding: clamp(18px, 3vw, 28px);
-      border: 1px solid var(--line);
-      border-radius: 8px;
-      background: var(--paper);
-      box-shadow: 0 22px 70px rgba(23, 32, 51, 0.08);
-    }
-
-    .roles {
-      display: grid;
-      grid-template-columns: repeat(6, minmax(0, 1fr));
-      gap: 10px;
-      margin-bottom: 24px;
-    }
-
-    .role {
-      min-height: 48px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      border: 1px solid #cdd8ea;
-      border-radius: 999px;
-      background: #edf3ff;
-      color: var(--navy);
-      font-weight: 800;
-      text-align: center;
-      white-space: nowrap;
-    }
-
-    .ai-band {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      min-height: 70px;
-      padding: 16px;
-      border-radius: 8px;
-      background: var(--navy);
-      color: #fff;
-      font-size: 30px;
-      font-weight: 900;
-      text-align: center;
-    }
-
-    .thread {
-      position: relative;
-      margin: 34px 0 0;
-      padding-top: 22px;
-    }
-
-    .thread-line {
-      height: 18px;
-      border-radius: 999px;
-      background: linear-gradient(90deg, var(--teal), var(--green), var(--gold), var(--rust), var(--teal));
-    }
-
-    .stages {
-      display: grid;
-      grid-template-columns: repeat(7, minmax(0, 1fr));
-      gap: 8px;
-      margin-top: 18px;
-    }
-
-    .stage {
-      position: relative;
-      min-height: 72px;
-      padding: 28px 6px 8px;
-      color: var(--ink);
-      text-align: center;
-      font-weight: 800;
-    }
-
-    .stage::before {
-      content: "";
-      position: absolute;
-      top: 0;
-      left: 50%;
-      width: 14px;
-      height: 14px;
-      transform: translateX(-50%);
-      border-radius: 50%;
-      background: var(--navy);
-    }
-
-    .principles {
-      display: grid;
-      grid-template-columns: repeat(3, minmax(0, 1fr));
-      gap: 14px;
-      max-width: 1180px;
-      margin: 24px auto 0;
-    }
-
-    .principle {
-      padding: 18px;
-      border: 1px solid var(--line);
-      border-radius: 8px;
-      background: var(--paper);
-    }
-
-    .principle strong {
-      display: block;
-      margin-bottom: 6px;
-      color: var(--navy);
-      font-size: 17px;
-    }
-
-    .principle span {
-      color: var(--muted);
-    }
-
-    .section {
-      padding: clamp(42px, 6vw, 76px) clamp(20px, 4vw, 64px);
-    }
-
-    .section-inner {
-      max-width: 1180px;
-      margin: 0 auto;
-    }
-
-    h2 {
-      margin: 0 0 18px;
-      color: var(--navy);
-      font-size: 38px;
-      letter-spacing: 0;
-    }
-
-    .module-grid {
-      display: grid;
-      grid-template-columns: repeat(4, minmax(0, 1fr));
-      gap: 14px;
-      margin-top: 24px;
-    }
-
-    .module {
-      min-height: 138px;
-      padding: 18px;
-      border: 1px solid var(--line);
-      border-radius: 8px;
-      background: var(--paper);
-    }
-
-    .module b {
-      display: block;
-      margin-bottom: 8px;
-      color: var(--navy);
-    }
-
-    .module p {
-      margin: 0;
-      color: var(--muted);
-      font-size: 14px;
-    }
-
-    .flow-section {
-      background: var(--wash);
-    }
-
-    .flow {
-      display: grid;
-      grid-template-columns: repeat(7, minmax(0, 1fr));
-      gap: 10px;
-      margin-top: 24px;
-    }
-
-    .flow-step {
-      min-height: 94px;
-      padding: 14px;
-      border: 1px solid var(--line);
-      border-radius: 8px;
-      background: var(--paper);
-      color: var(--navy);
-      font-weight: 800;
-    }
-
-    .flow-step span {
-      display: block;
-      margin-bottom: 8px;
-      color: var(--muted);
-      font-size: 13px;
-      font-weight: 700;
-    }
-
-    .footer {
-      padding: 26px clamp(20px, 4vw, 64px);
-      border-top: 1px solid var(--line);
-      color: var(--muted);
-      font-size: 14px;
-    }
-
-    .footer-inner {
-      max-width: 1180px;
-      margin: 0 auto;
-      display: flex;
-      justify-content: space-between;
-      gap: 20px;
-    }
-
-    @media (max-width: 980px) {
-      .roles {
-        grid-template-columns: repeat(3, minmax(0, 1fr));
-      }
-
-      .stages,
-      .flow,
-      .module-grid {
-        grid-template-columns: repeat(2, minmax(0, 1fr));
-      }
-
-      .principles {
-        grid-template-columns: 1fr;
-      }
-    }
-
-    @media (max-width: 620px) {
-      .topbar,
-      .footer-inner {
-        align-items: flex-start;
-        flex-direction: column;
-      }
-
-      .roles,
-      .stages,
-      .flow,
-      .module-grid {
-        grid-template-columns: 1fr;
-      }
-
-      .role {
-        white-space: normal;
-      }
-
-      h1 {
-        font-size: 36px;
-      }
-
-      .lead {
-        font-size: 17px;
-      }
-
-      .ai-band {
-        font-size: 20px;
-      }
-
-      h2 {
-        font-size: 28px;
-      }
-    }
-  </style>
+  <meta name="description" content="软件质量管理体系概览">
+  <title>软件质量管理体系</title>
+  <link rel="stylesheet" href="quality-system-site.css">
 </head>
-<body>
-  <header class="topbar">
-    <a class="brand" href="../README.md">Flowrium Quality</a>
-    <nav class="nav" aria-label="质量体系导航">
-      <a href="#overview">一图理解</a>
-      <a href="#modules">体系模块</a>
-      <a href="#flow">交付闭环</a>
-    </nav>
+<body data-style="governance">
+  <header class="site-header">
+    <div class="brand">软件质量管理体系 <span>为什么做、做到怎样、如何持续改进</span></div>
+    <div class="header-tools">
+      <div class="main-tabs" role="tablist" aria-label="质量体系内容视图">
+        <button id="overview-tab" type="button" role="tab" aria-selected="true" aria-controls="overview-content" data-tab="overview">体系概览</button>
+        <button id="flow-tab" type="button" role="tab" aria-selected="false" aria-controls="flow-content" data-tab="flow">软件交付质量保障流程图</button>
+      </div>
+    </div>
   </header>
 
-  <main>
-    <section id="overview" class="hero">
-      <div class="hero-inner">
-        <div class="hero-copy">
-          <p class="eyebrow">QUALITY SYSTEM OVERVIEW</p>
-          <h1>质量织入全员 AI Coding</h1>
-          <p class="lead">每个人都用 AI 更快交付，也一起把质量带进每一步。</p>
-        </div>
-
-        <div class="overview" aria-label="质量织入全员 AI Coding 总览图">
-          <div class="roles">
-            <div class="role">业务</div>
-            <div class="role">产品</div>
-            <div class="role">研发</div>
-            <div class="role">测试 / QA</div>
-            <div class="role">安全</div>
-            <div class="role">运维</div>
-          </div>
-
-          <div class="ai-band">AI Coding / Agent 协作成为共同工作方式</div>
-
-          <div class="thread" aria-label="质量贯穿交付全过程">
-            <div class="thread-line"></div>
-            <div class="stages">
-              <div class="stage">规划</div>
-              <div class="stage">设计</div>
-              <div class="stage">实现</div>
-              <div class="stage">构建</div>
-              <div class="stage">验证</div>
-              <div class="stage">运行</div>
-              <div class="stage">改进</div>
-            </div>
-          </div>
-        </div>
-
-        <div class="principles">
-          <div class="principle">
-            <strong>AI 提升效率</strong>
-            <span>但不替代质量判断。</span>
-          </div>
-          <div class="principle">
-            <strong>质量进入过程</strong>
-            <span>不是最后补救。</span>
-          </div>
-          <div class="principle">
-            <strong>证据形成闭环</strong>
-            <span>让交付可信可追溯。</span>
-          </div>
-        </div>
+  <main class="page">
+    <section class="hero" aria-labelledby="page-title">
+      <div>
+        <p class="eyebrow">QUALITY MANAGEMENT SYSTEM</p>
+        <h1 id="page-title">让每一次软件交付，都具备可验证的可信度。</h1>
+        <p class="lead">质量不是最终测试的结果，也不是文档的数量。它贯穿需求、设计、实现、集成、验证、发布、运行与反馈，并通过责任、证据和持续改进被真正建立起来。</p>
+      </div>
+      <div class="hero-summary" aria-label="体系结构概览">
+        <div class="hero-stat" style="--stat: var(--blue)"><strong>01</strong><span>一套稳定的价值观、原则与政策</span></div>
+        <div class="hero-stat" style="--stat: var(--teal)"><strong>07</strong><span>七个端到端的软件交付环节</span></div>
+        <div class="hero-stat" style="--stat: var(--purple)"><strong>09</strong><span>九项指导体系设计的质量原则</span></div>
+        <div class="hero-stat" style="--stat: var(--amber)"><strong>01</strong><span>受控的例外与豁免机制</span></div>
       </div>
     </section>
 
-    <section id="modules" class="section">
-      <div class="section-inner">
-        <h2>体系模块</h2>
-        <div class="module-grid">
-          <a class="module" href="../01-concepts/">
-            <b>核心概念与治理</b>
-            <p>定义质量价值观、原则、方针、治理规则和例外机制。</p>
-          </a>
-          <a class="module" href="../02-delivery-stages/">
-            <b>交付生命周期阶段</b>
-            <p>覆盖从规划变更到反馈改进的端到端交付闭环。</p>
-          </a>
-          <a class="module" href="../03-cross-cutting/">
-            <b>横向贯穿领域</b>
-            <p>安全、配置管理、追溯性等能力贯穿所有环节。</p>
-          </a>
-          <a class="module" href="../04-pipeline-verification/">
-            <b>流水线验证机制</b>
-            <p>用自动化验证、门禁和证据支撑可信交付。</p>
-          </a>
-          <a class="module" href="../05-ai-coding-extension/">
-            <b>AI 辅助开发增强</b>
-            <p>面向 AI Coding 和 Agent 协作的质量保障扩展。</p>
-          </a>
-          <a class="module" href="../06-metrics-reserved/">
-            <b>度量与指标</b>
-            <p>通过指标、看板和评价机制驱动持续改进。</p>
-          </a>
-          <a class="module" href="../07-standard-traceability/">
-            <b>标准合规追溯</b>
-            <p>映射 ISO 9001、ISO 27001 等标准要求。</p>
-          </a>
-          <a class="module" href="../templates/">
-            <b>模板库</b>
-            <p>提供评审、门禁、发布、测试和用户故事模板。</p>
-          </a>
-        </div>
+    <section id="overview-content" class="section tab-panel" role="tabpanel" aria-labelledby="overview-tab concept-title" data-tab-panel="overview">
+      <div class="section-heading">
+        <div><p class="eyebrow">CONCEPT FOUNDATION</p><h2 id="concept-title">从信念到可执行约束</h2></div>
+        <p class="section-copy">概念层只定义稳定的方向和边界；具体规程、验证点、证据和指标由后续模块承接。</p>
+      </div>
+      <div class="concept-chain">
+        <article class="concept-step"><span class="number">01</span><h3>质量价值观</h3><p>说明我们相信什么，所有质量活动以此为共同起点。</p></article>
+        <article class="concept-step"><span class="number">02</span><h3>质量原则</h3><p>指导体系设计与质量判断，不直接作为审计检查项。</p></article>
+        <article class="concept-step"><span class="number">03</span><h3>质量政策</h3><p>明确组织对产品、过程、风险与交付的基本要求。</p></article>
+        <article class="concept-step"><span class="number">04</span><h3>治理规则</h3><p>定义责任、文档、证据、裁剪、评审与持续维护方式。</p></article>
+        <article class="concept-step"><span class="number">05</span><h3>例外与豁免</h3><p>在特殊场景下受控偏离，保留审批、补救和复盘。</p></article>
       </div>
     </section>
 
-    <section id="flow" class="section flow-section">
-      <div class="section-inner">
-        <h2>交付闭环</h2>
-        <div class="flow">
-          <div class="flow-step"><span>01</span>规划与变更</div>
-          <div class="flow-step"><span>02</span>设计与实现</div>
-          <div class="flow-step"><span>03</span>集成与构建</div>
-          <div class="flow-step"><span>04</span>验证与准入</div>
-          <div class="flow-step"><span>05</span>发布与部署</div>
-          <div class="flow-step"><span>06</span>运行与观察</div>
-          <div class="flow-step"><span>07</span>反馈与改进</div>
-        </div>
+    <section class="section tab-panel" data-tab-panel="overview" aria-labelledby="delivery-title">
+      <div class="section-heading">
+        <div><p class="eyebrow">DELIVERY FLOW</p><h2 id="delivery-title">软件交付质量保障流程</h2></div>
+        <p class="section-copy">将质量要求织入从规划到反馈的完整交付链路。每个阶段的具体措施、实施状态和证据在流程图工作视图中统一维护。</p>
+      </div>
+      <div class="concept-chain delivery-chain">
+        <article class="concept-step"><span class="number">01</span><h3>规划与变更</h3><p>明确需求、验收标准、范围与风险。</p></article>
+        <article class="concept-step"><span class="number">02</span><h3>设计与实现</h3><p>完成方案、编码、评审与单元测试。</p></article>
+        <article class="concept-step"><span class="number">03</span><h3>集成与构建</h3><p>持续集成、制品管理与自动质量检查。</p></article>
+        <article class="concept-step"><span class="number">04</span><h3>验证与准入</h3><p>按风险验证并形成明确的准入结论。</p></article>
+        <article class="concept-step"><span class="number">05</span><h3>发布与部署</h3><p>受控发布、回滚准备与部署后核验。</p></article>
+        <article class="concept-step"><span class="number">06</span><h3>运行与观测</h3><p>通过监控、告警和响应维持稳定运行。</p></article>
+        <article class="concept-step"><span class="number">07</span><h3>反馈与改进</h3><p>让复盘、度量和反馈回流下一轮交付。</p></article>
       </div>
     </section>
+
+    <section class="section tab-panel" data-tab-panel="overview" aria-labelledby="value-title">
+      <div class="section-heading">
+        <div><p class="eyebrow">WHY WE DO IT</p><h2 id="value-title">三项质量价值观</h2></div>
+        <p class="section-copy">质量体系服务于业务结果和交付可信度，而不是制造额外的流程负担。</p>
+      </div>
+      <div class="value-grid">
+        <article class="value-item" style="--accent: var(--blue)"><h3>面向客户与业务结果</h3><p>持续满足需求、降低业务风险，并让交付结果可被信任。</p></article>
+        <article class="value-item" style="--accent: var(--teal)"><h3>内建可信与风险可控</h3><p>在全过程内建质量，尽早发现问题，而非在末端补救。</p></article>
+        <article class="value-item" style="--accent: var(--amber)"><h3>基于反馈的持续改进</h3><p>让标准、验证点、度量与运行反馈形成学习闭环。</p></article>
+      </div>
+    </section>
+
+    <section id="flow-content" class="section section--flow tab-panel" role="tabpanel" aria-labelledby="flow-tab" data-tab-panel="flow" hidden>
+      <div class="section-heading">
+        <div><p class="eyebrow">HOW WE DELIVER</p><h2 id="flow-title">软件交付质量保障流程</h2></div>
+        <p class="section-copy">流程节点表达交付主线；外围措施表达每个阶段应建立的质量能力。当前所有措施均处于“未实现”初始状态，待逐项评估和建设。</p>
+      </div>
+      <div class="flow-note"><span class="status-dot"></span>灰色表示未实现。点击流程图中的措施，可查看质量要求和应保留的证据。</div>
+      <div class="flow-native"><quality-flow></quality-flow></div>
+    </section>
+
+    <section class="section tab-panel" data-tab-panel="overview" aria-labelledby="principle-title">
+      <div class="section-heading">
+        <div><p class="eyebrow">HOW WE JUDGE</p><h2 id="principle-title">九项质量原则</h2></div>
+        <p class="section-copy">这些原则指导体系设计和质量判断，最终应落到政策、规程、验证点、证据和度量结果。</p>
+      </div>
+      <div class="principle-grid">
+        <div class="principle"><b>01 客户价值优先</b><span>以业务目标、用户需求和验收结果作为质量起点。</span></div>
+        <div class="principle"><b>02 责任明确与有效问责</b><span>关键决策必须有责任人、审批权和例外机制。</span></div>
+        <div class="principle"><b>03 全员参与与跨职能协作</b><span>业务、研发、测试、运维与安全共同构成体系。</span></div>
+        <div class="principle"><b>04 过程方法与端到端视角</b><span>管理完整交付过程，而非孤立优化单点活动。</span></div>
+        <div class="principle"><b>05 内建质量与尽早验证</b><span>能在前面发现的问题，不推迟到后面。</span></div>
+        <div class="principle"><b>06 证据驱动与全程可追溯</b><span>放行、回滚、豁免和复盘都要有证据链。</span></div>
+        <div class="principle"><b>07 自动化优先与可重复交付</b><span>用可重复的自动验证代替口头结论和记忆。</span></div>
+        <div class="principle"><b>08 风险、安全与变更前置控制</b><span>把风险、安全、合规和变更控制前置。</span></div>
+        <div class="principle"><b>09 反馈闭环与持续改进</b><span>让数据、客户反馈、缺陷与复盘回流体系。</span></div>
+      </div>
+    </section>
+
+    <section class="section tab-panel" data-tab-panel="overview" aria-labelledby="policy-title">
+      <div class="section-heading">
+        <div><p class="eyebrow">WHAT WE REQUIRE</p><h2 id="policy-title">质量政策与治理</h2></div>
+        <p class="section-copy">所有项目默认适用质量政策；可以按风险等级调整执行深度，但不得删除关键责任、关键控制和必要证据。</p>
+      </div>
+      <div class="policy-layout">
+        <div class="policy-statement">组织应建立并持续改进软件质量管理体系，确保软件产品和交付过程持续满足业务、用户、安全、合规和运行稳定性要求。</div>
+        <ul class="policy-list">
+          <li>需求可验证、可追溯，风险需求前置评估</li><li>设计保持简单、清晰、可维护，并考虑运行边界</li>
+          <li>代码、测试、依赖与配置变更都有明确责任</li><li>构建自动化，制品具有版本标识和可追溯性</li>
+          <li>验证深度与变更风险匹配，准入结论有证据</li><li>发布受控，关键系统具备回滚或恢复方案</li>
+        </ul>
+      </div>
+    </section>
+
+    <section class="section tab-panel" data-tab-panel="overview" aria-labelledby="governance-title">
+      <div class="section-heading"><div><p class="eyebrow">HOW WE KEEP IT WORKING</p><h2 id="governance-title">治理与受控偏离</h2></div></div>
+      <div class="governance-grid">
+        <ol class="governance-list">
+          <li><b>01</b><span>质量负责人维护体系的一致性、完整性和持续演进。</span></li>
+          <li><b>02</b><span>规程和验证点分别明确维护责任、触发时机、通过条件和证据。</span></li>
+          <li><b>03</b><span>项目按风险与复杂度裁剪，但不能删除关键质量责任和关键风险控制。</span></li>
+          <li><b>04</b><span>缺陷、事故、用户反馈和运行数据驱动规程、门禁和模板改进。</span></li>
+        </ol>
+        <aside class="exception"><h3>例外与豁免不是绕过质量</h3><p>它只适用于紧急、特殊或低风险场景，且必须记录原因与风险、明确审批人和有效范围，并在必要时补救或复盘。</p><strong>严重安全漏洞、数据破坏风险、伪造证据等情形不得豁免。</strong></aside>
+      </div>
+    </section>
+
+    <footer class="footer">软件质量管理体系概览。内容来源：01-concepts 概念层与 02-delivery-stages 交付阶段。</footer>
   </main>
 
-  <footer class="footer">
-    <div class="footer-inner">
-      <span>Flowrium Quality Management System</span>
-      <a href="../README.md">返回质量体系总览</a>
-    </div>
-  </footer>
+  <script src="quality-flow-component.js"></script>
+  <script>
+    const body = document.body;
+
+    const tabs = document.querySelectorAll('[data-tab]');
+    const panels = document.querySelectorAll('[data-tab-panel]');
+    function setTab(selected) {
+      tabs.forEach((item) => item.setAttribute('aria-selected', String(item.dataset.tab === selected)));
+      panels.forEach((panel) => { panel.hidden = panel.dataset.tabPanel !== selected; });
+      body.classList.toggle('flow-active', selected === 'flow');
+      if (selected === 'flow') document.querySelector('quality-flow')?.refresh();
+    }
+
+    tabs.forEach((tab) => tab.addEventListener('click', () => setTab(tab.dataset.tab)));
+    setTab('overview');
+  </script>
 </body>
 </html>
